@@ -17,4 +17,5 @@ This is the backend server for the **Traveller Planner** app — a travel planni
 ---
 
 ## 📁 Project Structure
+traveller-planner-backend/ ├── controllers/ # Business logic for routes ├── models/ # Mongoose schemas ├── routes/ # API endpoints ├── middlewares/ # Auth and error handling ├── utils/ # Helpers (e.g., map API) ├── config/ # DB and external config ├── app.js # Express app config ├── server.js # Entry point └── .env # Environment variables
 
