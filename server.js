@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 
 const app=express()
+dotenv.config();
 
 app.use(express.json()); // Should be placed before routes
 
