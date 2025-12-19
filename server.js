@@ -1,24 +1,34 @@
-const express = require ("express");
-const dotenv = require("dotenv");
-const cors = require("cors");
+const express = require('express');
+const dotenv = require('dotenv');
+const cors = require('cors');
+const connectDB = require('./config/db');
+const routes = require('./routes/routes');
+const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 
-const app=express()
 dotenv.config();
 
-app.use(express.json()); // Should be placed before routes
+connectDB();
 
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+app.use('/api', routes);
+
+app.use(notFound);
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 3001;
 
 const startServer = async () => {
-    try {
-      await connectDb(); // Ensure DB connection before starting the server
-      app.listen(PORT, () => {
-        console.log(`Server is running on port ${PORT}`);
-      });
-    } catch (error) {
-      console.error("Server failed to start:", error);
-    }
-  };
+  try {
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error("Server failed to start:", error);
+  }
+};
   
-  startServer();
+startServer();
